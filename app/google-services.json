@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "618403420238",
+    "project_id": "pruebatarcoles"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618403420238:android:4c661182088bc3db",
+        "android_client_info": {
+          "package_name": "com.example.michael.pruebatarcoles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618403420238-oi7lgj2a656h3tnq36s5kei6fh7ca2o9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.michael.pruebatarcoles",
+            "certificate_hash": "f1aa5618552f1bca56aecf8b49769f770a61c4f4"
+          }
+        },
+        {
+          "client_id": "618403420238-bpi29qq8vtvc18tifnf3d34tmvg8ve7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU-EwmelrguW9C5pNYZFw7Mfa11MVTjpg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
