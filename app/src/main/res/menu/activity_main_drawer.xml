@@ -8,13 +8,13 @@
             android:icon="@android:drawable/ic_menu_today"
             android:title="Reserva de Salas" />
         <item
-            android:id="@+id/preguntas"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="Preguntas" />
+            android:id="@+id/info_general"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
+            android:title="Información General" />
         <item
-            android:id="@+id/telefonos"
-            android:icon="@android:drawable/ic_menu_call"
-            android:title="Numeros de telefono" />
+            android:id="@+id/consulta"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="Consulta" />
     </group>
 
     <item android:title="Comunicación">

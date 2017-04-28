@@ -1,7 +1,11 @@
 package com.example.michael.pruebatarcoles;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -16,6 +20,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +43,9 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "MyActivity";
     static final String STATE_SCORE = "playerScore";
     static final String STATE_LEVEL = "playerLevel";
+    private EditText et_fecha;
+    private Button bt_fecha;
+    private int dia, mes, ano, hora, minutos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +76,14 @@ public class MainActivity extends AppCompatActivity
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this ,  null )
+                .enableAutoManage(this, null)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
 
         startActivityForResult(signInIntent, RC_SIGN_IN);
-
     }
-
 
 
     @Override
@@ -121,28 +129,30 @@ public class MainActivity extends AppCompatActivity
         /**/
         if (id == R.id.reserva_salas) {
             fragment = new ReservaSala();
+        } else if (id == R.id.info_general) {
+            fragment = new InformacionBiblioteca();
+        } else if (id == R.id.consulta) {
 
-        }else if (id == R.id.preguntas) {
+        } else if (id == R.id.mensajes) {
 
-        } else if (id == R.id.telefonos) {
+        }
 
-        } else if (id == R.id.preguntas) {
-
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
         setTitle(item.getTitle());
         return true;
     }
 
 
-        private void signIn() {
-            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-            startActivityForResult(signInIntent, RC_SIGN_IN);
-        }
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -168,36 +178,41 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void loadInfo(GoogleSignInAccount acct){
-        Toast.makeText(getApplicationContext(),"Hola "+ acct.getDisplayName(), Toast.LENGTH_SHORT).show();
+    private void loadInfo(GoogleSignInAccount acct) {
+        Toast.makeText(getApplicationContext(), "Hola " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
         TextView tvnombre = (TextView) findViewById(R.id.tv_nombreUsuario);
         TextView tvcorreo = (TextView) findViewById(R.id.tv_correoUsuario);
         ImageView ivfoto = (ImageView) findViewById(R.id.iv_imgUsuario);
         tvnombre.setText(acct.getDisplayName());
         tvcorreo.setText(acct.getEmail());
-        ivfoto.setLayoutParams(new LinearLayout.LayoutParams(150,150));
+        ivfoto.setLayoutParams(new LinearLayout.LayoutParams(150, 150));
         //ivfoto.setImageResource(R.mipmap.coco2);
 
 
     }
 
-    public void logout(MenuItem menuItem){
+    public void logout(MenuItem menuItem) {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient);
         finish();
     }
 
-    /*public void backstack(){
-        Intent intent = new Intent(this, reservaSala.class);
 
-        PendingIntent pendingIntent =
-                TaskStackBuilder.create(this)
-                        // add all of DetailsActivity's parents to the stack,
-                        // followed by DetailsActivity itself
-                        .addNextIntentWithParentStack(intent)
-                        .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        TaskStackBuilder.create(this)
-                .addNextIntentWithParentStack(intent)
-                .startActivities();
-    }*/
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void elegirFecha() {
+        final Calendar c = Calendar.getInstance();
+        dia = c.get(Calendar.DAY_OF_MONTH);
+        mes = c.get(Calendar.MONTH);
+        ano = c.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                et_fecha.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+            }
+        }
+                , dia, mes, ano);
+        datePickerDialog.show();
+    }
+
 
 }
