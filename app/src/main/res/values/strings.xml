@@ -18,4 +18,27 @@
         <item>Laboratorio de Idiomas</item>
     </string-array>
 
+    <string name="Horario"><string name="hora"><b>HORARIO:</b></string>
+        \n
+        \n
+        Lunes a viernes: 7 am a 7 pm Sábados: 8 am a 4 pm. Domingos y feriados: cerrado"</string>
+    <string name="Ubicacion"><string name="ubi"><b>UBICACIÓN:</b></string>
+        \n
+        \n
+        Primer nivel del edificio principal,
+        Recinto de Grecia, Tacares Norte de Alajuela."</string>
+    <string name="Contacto"><string name="con"><b>INFORMACIÓN DE CONTACTO:</b></string>
+        \n
+        \n
+    Correo electrónico: biblio.rug@ucr.ac.cr
+        Teléfono 2511-7525 / 2511-7508"</string>
+    <string name="servicios"><string name="sevices"><b> SERVICIOS QUE BRINDA DE LA BIBLIOTECA</b></string>
+        \n
+        \n
+        -Préstamo y devolución de material bibliográfico.
+        - Préstamo y devolución de equiposaudiovisuales.
+        - Préstamo de salas audiovisuales,   auditorio y laboratorio de idiomas.
+        (puede solicitar el servicio en línea).
+        - Recomendaciones para compra (puede   solicitar el servicio en línea)."</string>
+
 </resources>
