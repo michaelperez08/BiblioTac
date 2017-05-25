@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
 
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
-    private static final String TAG = "MyActivity";
+    private static final String TAG = "BiblioTac";
     static final String STATE_SCORE = "playerScore";
     static final String STATE_LEVEL = "playerLevel";
     private EditText et_fecha;
@@ -71,18 +71,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, null)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-
-        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
 

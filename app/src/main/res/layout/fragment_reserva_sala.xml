@@ -25,7 +25,7 @@
         android:layout_marginBottom="102dp" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/sp_salas"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:entries="@array/salas"
@@ -46,7 +46,7 @@
         app:layout_constraintRight_toLeftOf="@+id/et_fecha"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bt_inicio"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/sp_salas" />
 
     <EditText
         android:id="@+id/et_fecha"
@@ -58,7 +58,7 @@
         app:layout_constraintBottom_toTopOf="@+id/et_inicio"
         app:layout_constraintLeft_toRightOf="@+id/bt_fecha"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/sp_salas" />
 
     <Button
         android:id="@+id/bt_inicio"
