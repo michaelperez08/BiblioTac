@@ -69,26 +69,41 @@ public class ReservaSala extends Fragment implements View.OnClickListener, Respo
         super.onViewCreated(view, savedInstanceState);
         bt_fecha = (Button) view.findViewById(R.id.bt_fecha);
         bt_inico = (Button) view.findViewById(R.id.bt_inicio);
+        bt_fin = (Button) view.findViewById(R.id.bt_fin);
         bt_reservar = (Button) view.findViewById(R.id.reservar_sala);
 
         bt_fecha.setOnClickListener(this);
         bt_inico.setOnClickListener(this);
+        bt_fin.setOnClickListener(this);
         bt_reservar.setOnClickListener(this);
+
+        //desabilitar edicion de camapos de texto
+        ((EditText) view.findViewById(R.id.et_fecha)).setEnabled(false);
+        ((EditText) view.findViewById(R.id.et_inicio)).setEnabled(false);
+        ((EditText) view.findViewById(R.id.et_fin)).setEnabled(false);
+
     }
 
     @Override
     public void onClick(View v) {
         DialogFragment dg = null;
         SolicitudSala ss = null;
+        String hi = ((EditText) getActivity().findViewById(R.id.et_inicio)).getText().toString();
+        String hf = ((EditText) getActivity().findViewById(R.id.et_fin)).getText().toString();
+        String fs = ((EditText) getActivity().findViewById(R.id.et_fecha)).getText().toString();
+
         switch (v.getId()){
             case R.id.bt_fecha:{
-                dg =  new SelectDateFragment();
+                dg =  new SelectDateFragment(fs);
                 break;
             }case R.id.bt_inicio:{
-                dg = new SelectTimeFragment();
+                dg = new SelectTimeFragment('i',hi);
+                break;
+            }case R.id.bt_fin:{
+                dg = new SelectTimeFragment('f',hf);
                 break;
             }case R.id.reservar_sala:{
-                obtenerDatos(v);
+                obtenerDatos( );
                 break;
             }
         }
@@ -108,7 +123,6 @@ public class ReservaSala extends Fragment implements View.OnClickListener, Respo
         builder.setExclusionStrategies(new DefaultExclusionStrategy());
         Gson gson = builder.create();
 
-
     }
 
 
@@ -117,7 +131,7 @@ public class ReservaSala extends Fragment implements View.OnClickListener, Respo
         void onFragmentInteraction(Uri uri);
     }
 
-    public void obtenerDatos(View v){
+    public void obtenerDatos(){
         String nombre = "Michael";
         String correo = "michael.pemu@hola.com";
         String fecha = ((EditText) getActivity().findViewById(R.id.et_fecha)).getText().toString();
