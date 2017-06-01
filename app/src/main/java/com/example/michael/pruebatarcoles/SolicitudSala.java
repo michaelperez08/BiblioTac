@@ -24,74 +24,81 @@ public class SolicitudSala {
 
     private String nombre;
     private String correo;
+    private String carnet;
     private String horaI;
     private String horaF;
     private String fecha;
     private String sala;
 
-    public static final String url = "http://llantasyreencauchesgriegos.com/php/enviar_solicitud.php";
+    public static final String url = "http://perezmurillo.com/php/enviar_solicitud.php";
 
-    public SolicitudSala(String nombre, String correo, String horaI, String horaF, String fecha, String sala) {
+    public SolicitudSala(String nombre, String correo, String horaI, String horaF, String fecha, String sala, String carnet) {
         this.nombre = nombre;
         this.correo = correo;
         this.horaI = horaI;
         this.horaF = horaF;
         this.fecha = fecha;
         this.sala = sala;
+        this.carnet = carnet;
     }
 
-    public StringRequest getRequest (Response.Listener<String> responseListener, Response.ErrorListener errorListener){
-        final HashMap<String,String> datosCorreo = new HashMap<>();
-        datosCorreo.put("nombre",nombre);
-        datosCorreo.put("sala",sala);
-        datosCorreo.put("correo_solicitante",correo);
-        datosCorreo.put("horaincial",horaI);
-        datosCorreo.put("horafinal",horaF);
-        datosCorreo.put("fecha",fecha);
-
-        StringRequest request = getStringRequestSalas();
-
-        request.setRetryPolicy(new LongTimeoutAndTryRetryPolicy(LongTimeoutAndTryRetryPolicy.RETRIES_PHONE_ISP));
-        return  request;
-
+    public String getNombre() {
+        return nombre;
     }
 
-    public StringRequest getStringRequestSalas(){
-        //Creating a string request
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //If we are getting success from server
-
-                    }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //You can handle error here if you want
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> datosCorreo = new HashMap<>();
-                //Adding parameters to request
-                datosCorreo.put("nombre",nombre);
-                datosCorreo.put("sala",sala);
-                datosCorreo.put("correo_solicitante",correo);
-                datosCorreo.put("horaincial",horaI);
-                datosCorreo.put("horafinal",horaF);
-                datosCorreo.put("fecha",fecha);
-
-                //returning parameter
-                return datosCorreo;
-            }
-        };
-        return stringRequest;
-        //Adding the string request to the queue
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
 
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
+    public String getHoraI() {
+        return horaI;
+    }
+
+    public void setHoraI(String horaI) {
+        this.horaI = horaI;
+    }
+
+    public String getHoraF() {
+        return horaF;
+    }
+
+    public void setHoraF(String horaF) {
+        this.horaF = horaF;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getSala() {
+        return sala;
+    }
+
+    public void setSala(String sala) {
+        this.sala = sala;
+    }
+
+    public static String getUrl() {
+        return url;
+    }
+
+    public String getCarnet() {
+        return carnet;
+    }
+
+    public void setCarnet(String carnet) {
+        this.carnet = carnet;
+    }
 }

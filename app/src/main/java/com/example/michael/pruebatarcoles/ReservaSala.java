@@ -13,12 +13,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.michael.pruebatarcoles.SolicitudSala.url;
 
 
 public class ReservaSala extends Fragment implements View.OnClickListener, Response.ErrorListener, Response.Listener<String> {
@@ -132,17 +140,71 @@ public class ReservaSala extends Fragment implements View.OnClickListener, Respo
     }
 
     public void obtenerDatos(){
-        String nombre = "Michael";
-        String correo = "michael.pemu@hola.com";
+        String nombre = ((EditText) getActivity().findViewById(R.id.et_nombre_ss)).getText().toString();
+        String correo = ((EditText) getActivity().findViewById(R.id.et_correo_ss)).getText().toString();
+        String carnet = ((EditText) getActivity().findViewById(R.id.et_carnet_ss)).getText().toString();
         String fecha = ((EditText) getActivity().findViewById(R.id.et_fecha)).getText().toString();
         String horaInicio = ((EditText) getActivity().findViewById(R.id.et_inicio)).getText().toString();
         String horaFin = ((EditText) getActivity().findViewById(R.id.et_fin)).getText().toString();
         String sala = ((Spinner) getActivity().findViewById(R.id.sp_salas)).getSelectedItem().toString();
 
-        SolicitudSala ss = new SolicitudSala(nombre,correo,horaInicio,horaFin,fecha,sala);
-        Request<?> request = ss.getRequest(this,this);
-        AppController.getInstance().addToRequestQueue(request);
+        if(!nombre.isEmpty() && !correo.isEmpty() && !carnet.isEmpty() && !fecha.isEmpty() && !horaInicio.isEmpty() && !horaFin.isEmpty()){
+            Request<?> request = getRequest(new SolicitudSala(nombre, correo, horaInicio, horaFin, fecha, sala, carnet));
+            AppController.getInstance().addToRequestQueue(request);
+        }else{
+            Toast.makeText(getActivity().getApplicationContext(), "Por favor llene todos los campos", Toast.LENGTH_SHORT).show();
+        }
 
+    }
+
+    public StringRequest getRequest(final SolicitudSala ss){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("true")) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Solicitud de Reserva Enviada", Toast.LENGTH_SHORT).show();
+                            limpiarCampos();
+                        }else{
+                            Toast.makeText(getActivity().getApplicationContext(), "Solicitud de Reserva Fallo, intente de nievo mas tarde", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //You can handle error here if you want
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> datosCorreo = new HashMap<>();
+                //Adding parameters to request
+                datosCorreo.put("nombre",ss.getNombre());
+                datosCorreo.put("sala",ss.getSala());
+                datosCorreo.put("correo_solicitante",ss.getCorreo());
+                datosCorreo.put("horaincial",ss.getHoraI());
+                datosCorreo.put("horafinal",ss.getHoraF());
+                datosCorreo.put("fecha",ss.getFecha());
+                datosCorreo.put("carnet",ss.getCarnet());
+                //returning parameter
+                return datosCorreo;
+            }
+        };
+        stringRequest.setRetryPolicy(new LongTimeoutAndTryRetryPolicy(LongTimeoutAndTryRetryPolicy.RETRIES_PHONE_ISP));
+        return stringRequest;
+    }
+
+    public void limpiarCampos(){
+        ((EditText) getActivity().findViewById(R.id.et_nombre_ss)).setText("");
+        ((EditText) getActivity().findViewById(R.id.et_correo_ss)).setText("");
+        ((EditText) getActivity().findViewById(R.id.et_carnet_ss)).setText("");
+        ((EditText) getActivity().findViewById(R.id.et_fecha)).setText("");
+        ((EditText) getActivity().findViewById(R.id.et_inicio)).setText("");
+        ((EditText) getActivity().findViewById(R.id.et_fin)).setText("");
+        ((Spinner) getActivity().findViewById(R.id.sp_salas)).setSelection(0);
     }
 
 }
