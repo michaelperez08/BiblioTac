@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * Created by alberto on 25/05/17.
  */
-public class InformacionBibliotecaTest {
+public class fragmentinformacionbibliotecaTest {
     @Test
     public void newInstance() throws Exception {
 

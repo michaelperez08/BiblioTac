@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * Created by alberto on 25/05/17.
  */
-public class ReservaSalaTest {
+public class fragmentreservasalaTest {
     @Test
     public void onCreate() throws Exception {
         ReservaSala sala = new ReservaSala();
