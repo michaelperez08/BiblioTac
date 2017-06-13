@@ -15,6 +15,10 @@
             android:id="@+id/consulta"
             android:icon="@android:drawable/ic_menu_help"
             android:title="Consulta" />
+        <item
+            android:id="@+id/info_salas"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="Informacion Salas" />
     </group>
 
     <item android:title="Comunicación">

@@ -13,21 +13,29 @@
       },
       "oauth_client": [
         {
-          "client_id": "618403420238-oi7lgj2a656h3tnq36s5kei6fh7ca2o9.apps.googleusercontent.com",
+          "client_id": "618403420238-12m8tdp6tk57ptrl52uc6063avla89tc.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "618403420238-qfv7h18pepqlt15odujbrjog7dtkvbio.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.michael.pruebatarcoles",
+            "certificate_hash": "678a3648ccf6c0ef5fea0675636cf0e61ba11828"
+          }
+        },
+        {
+          "client_id": "618403420238-59u501jhcb8m1ufbd84efkue1aqou2g7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.michael.pruebatarcoles",
             "certificate_hash": "f1aa5618552f1bca56aecf8b49769f770a61c4f4"
           }
-        },
-        {
-          "client_id": "618403420238-bpi29qq8vtvc18tifnf3d34tmvg8ve7g.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDU-EwmelrguW9C5pNYZFw7Mfa11MVTjpg"
+          "current_key": "AIzaSyC-_4xewV-dC-wBd1FgFr5fo62lUWUfLLA"
         }
       ],
       "services": {
