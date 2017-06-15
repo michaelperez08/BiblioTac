@@ -16,24 +16,58 @@ import java.util.Calendar;
 
 public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
+    private String fechainiciada;
+    final Calendar calendar = Calendar.getInstance();
+
+    public SelectDateFragment(String fechainiciada) {
+        this.fechainiciada = fechainiciada;
+    }
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        populateSetDate(year, month+1, dayOfMonth);
+        populateSetDate(year, month, dayOfMonth);
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Calendar calendar = Calendar.getInstance();
-        int yy = calendar.get(Calendar.YEAR);
-        int mm = calendar.get(Calendar.MONTH);
-        int dd = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int yy = getAno();
+        int mm = getMes();
+        int dd = getDia();
         return new DatePickerDialog(getActivity(), this, yy, mm, dd);
     }
 
     public void populateSetDate(int year, int month, int day) {
         EditText et_fecha = (EditText) getActivity().findViewById(R.id.et_fecha);
-        et_fecha.setText(month+"/"+day+"/"+year);
+        et_fecha.setText(String.format("%02d/%02d/%s", day, month, year));
+    }
+
+    public int getAno(){
+        if(!fechainiciada.isEmpty()) {
+            String m = fechainiciada.substring(6, 10);
+            return Integer.parseInt(fechainiciada.substring(6, 10));
+        }else{
+            return calendar.get(Calendar.YEAR);
+        }
+    }
+
+    public int getMes(){
+        if(!fechainiciada.isEmpty()) {
+            String m = fechainiciada.substring(3, 5);
+            return Integer.parseInt(fechainiciada.substring(3, 5));
+        }else{
+            return calendar.get(Calendar.MONTH);
+        }
+    }
+
+    public int getDia(){
+        if(!fechainiciada.isEmpty()) {
+            String m = fechainiciada.substring(0, 2);
+            return Integer.parseInt(fechainiciada.substring(0, 2));
+        }else{
+            return calendar.get(Calendar.DAY_OF_MONTH);
+        }
     }
 
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,6 +33,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity
 
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
-    private static final String TAG = "MyActivity";
+    private static final String TAG = "BiblioTac";
     static final String STATE_SCORE = "playerScore";
     static final String STATE_LEVEL = "playerLevel";
     private EditText et_fecha;
@@ -53,15 +55,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -76,13 +69,17 @@ public class MainActivity extends AppCompatActivity
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, null)
+                .enableAutoManage(this /* FragmentActivity */, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                        System.out.println("");
+                    }
+                } /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        signIn();
 
-        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
 
@@ -132,9 +129,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.info_general) {
             fragment = new InformacionBiblioteca();
         } else if (id == R.id.consulta) {
-
+            fragment = new ConsultaGeneral();
         } else if (id == R.id.mensajes) {
 
+        } else if(id == R.id.info_salas){
+            fragment = new InformacionSalas();
         }
 
         if (fragment != null) {
