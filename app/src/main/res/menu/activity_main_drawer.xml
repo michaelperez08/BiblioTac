@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/reserva_salas"
+            android:icon="@android:drawable/ic_menu_today"
+            android:title="Reserva de Salas" />
+        <item
+            android:id="@+id/info_general"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
+            android:title="Información General" />
+        <item
+            android:id="@+id/consulta"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="Consulta" />
+        <item
+            android:id="@+id/info_salas"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="Informacion Salas" />
+    </group>
+
+    <item android:title="Comunicación">
+        <menu>
+            <item
+                android:id="@+id/mensajes"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Mensajes" />
+        </menu>
+    </item>
+
+</menu>
