@@ -44,7 +44,6 @@ public class ConsultaGeneral extends Fragment implements View.OnClickListener {
     private String mParam2;
     private Button bt_enviar_cg;
     private final String url = "http://perezmurillo.com/php/consulta_general.php";
-    private Conexion conexion;
 
     private OnFragmentInteractionListener mListener;
 
@@ -83,7 +82,6 @@ public class ConsultaGeneral extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         bt_enviar_cg = (Button) getActivity().findViewById(R.id.bt_enviar_cg);
         bt_enviar_cg.setOnClickListener(this);
-        conexion = new Conexion();
     }
 
     @Override
@@ -110,16 +108,12 @@ public class ConsultaGeneral extends Fragment implements View.OnClickListener {
         String correo = ((EditText) getActivity().findViewById(R.id.et_correo_cg)).getText().toString();
         String telefono = ((EditText) getActivity().findViewById(R.id.et_telefono_cg)).getText().toString();
         String consulta = ((EditText) getActivity().findViewById(R.id.et_consulta_general)).getText().toString();
-        if(conexion.verificarConexion(this.getContext())) {
-            if (!nombre.isEmpty() && !correo.isEmpty() && !telefono.isEmpty() && !consulta.isEmpty()) {
-                Request<?> request = getRequest(nombre, correo, consulta, telefono);
-                AppController.getInstance().addToRequestQueue(request);
-                Toast.makeText(getActivity().getApplicationContext(), "Enviando... Solicitud", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getActivity().getApplicationContext(), "Por favor llene todos los campos", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(getActivity().getApplicationContext(), "No tiene Conección", Toast.LENGTH_SHORT).show();
+
+        if(!nombre.isEmpty() && !correo.isEmpty() && !telefono.isEmpty() && !consulta.isEmpty()){
+            Request<?> request = getRequest(nombre, correo, consulta, telefono);
+            AppController.getInstance().addToRequestQueue(request);
+        }else{
+            Toast.makeText(getActivity().getApplicationContext(), "Por favor llene todos los campos", Toast.LENGTH_SHORT).show();
         }
 
     }
