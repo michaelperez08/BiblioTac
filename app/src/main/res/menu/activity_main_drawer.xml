@@ -4,17 +4,25 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/principal"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="Principal" />
+        <item
             android:id="@+id/reserva_salas"
             android:icon="@android:drawable/ic_menu_today"
             android:title="Reserva de Salas" />
         <item
+            android:id="@+id/reservar_libro"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Prestamo Entre Bibliotecas" />
+        <item
+            android:id="@+id/busqueda_libro"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:title="Localizar Documentos" />
+        <item
             android:id="@+id/info_general"
             android:icon="@android:drawable/ic_menu_sort_by_size"
             android:title="Información General" />
-        <item
-            android:id="@+id/consulta"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="Consulta" />
         <item
             android:id="@+id/info_salas"
             android:icon="@android:drawable/ic_menu_info_details"
@@ -24,9 +32,9 @@
     <item android:title="Comunicación">
         <menu>
             <item
-                android:id="@+id/mensajes"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Mensajes" />
+                android:id="@+id/consulta"
+                android:icon="@android:drawable/ic_menu_help"
+                android:title="Consulta" />
         </menu>
     </item>
 

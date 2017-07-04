@@ -13,10 +13,33 @@
         <item>Sala A</item>
         <item>Sala B</item>
         <item>Sala de Proyección</item>
-        <item>Sala de Inevestigación</item>
         <item>Auditorio</item>
+        <item>Sala de Inevestigación</item>
         <item>Laboratorio de Idiomas</item>
     </string-array>
+
+    <string-array name="documentos">
+        <item>Libro</item>
+        <item>Artículo de Revista</item>
+        <item>Tesis</item>
+        <item>Material Audiovisual</item>
+    </string-array>
+
+    <string-array name="documentos2">
+        <item>Libro</item>
+        <item>Artículo de Revista</item>
+        <item>Tesis</item>>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="tipousuario">
+        <item>Estudiante</item>
+        <item>Docente</item>
+        <item>Investigardor</item>
+        <item>Funcionario</item>
+        <item>Otro</item>
+    </string-array>
+
 
     <string name="Horario"><string name="hora"><b>HORARIO:</b></string>
         \n
@@ -41,5 +64,18 @@
         - Préstamo de salas audiovisuales,auditorio y laboratorio de idiomas.(puede solicitar el servicio en línea).
         \n
         - Recomendaciones para compra (puede   solicitar el servicio en línea)."</string>
+
+    <string name="Mision"><string name="mision"><b>BIENVENIDO</b></string>
+        \n
+        \n
+        Ponemos a su disposición servicios y recursos como apoyo a la formación académica y procesos de investigación,
+        además de ser una extensión de los servicios que se brindan de forma presencial en la biblioteca.</string>
+
+    <string name="parrafo">
+    La Biblioteca trabaja bajo la directriz de la Dirección del Recinto Grecia y en colaboración con la Coordinación
+    de Investigación de la Sede de Occidente. Asímismo el procesamiento técnico, la gestión de los materiales impresos y
+    el acceso a los servicios digitales, se trabaja de acuerdo a las directrices y procedimiento establecido por el Sistema
+    de Bibliotecas, Documentación e Información (SIBDI) de la Universidad de Costa Rica.</string>
+
 
 </resources>

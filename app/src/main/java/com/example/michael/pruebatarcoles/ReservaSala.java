@@ -41,6 +41,7 @@ public class ReservaSala extends Fragment implements View.OnClickListener, Respo
     private EditText et_fecha;
     private Button bt_fecha, bt_inico, bt_fin, bt_reservar;
     private int dia, mes, ano, hora, minutos;
+    private Conexion conexion;
 
     private OnFragmentInteractionListener mListener;
 
@@ -75,6 +76,7 @@ public class ReservaSala extends Fragment implements View.OnClickListener, Respo
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        conexion = new Conexion();
         bt_fecha = (Button) view.findViewById(R.id.bt_fecha);
         bt_inico = (Button) view.findViewById(R.id.bt_inicio);
         bt_fin = (Button) view.findViewById(R.id.bt_fin);
@@ -147,12 +149,16 @@ public class ReservaSala extends Fragment implements View.OnClickListener, Respo
         String horaInicio = ((EditText) getActivity().findViewById(R.id.et_inicio)).getText().toString();
         String horaFin = ((EditText) getActivity().findViewById(R.id.et_fin)).getText().toString();
         String sala = ((Spinner) getActivity().findViewById(R.id.sp_salas)).getSelectedItem().toString();
-
-        if(!nombre.isEmpty() && !correo.isEmpty() && !carnet.isEmpty() && !fecha.isEmpty() && !horaInicio.isEmpty() && !horaFin.isEmpty()){
-            Request<?> request = getRequest(new SolicitudSala(nombre, correo, horaInicio, horaFin, fecha, sala, carnet));
-            AppController.getInstance().addToRequestQueue(request);
-        }else{
-            Toast.makeText(getActivity().getApplicationContext(), "Por favor llene todos los campos", Toast.LENGTH_SHORT).show();
+        if(conexion.verificarConexion(this.getContext())) {
+            if(!nombre.isEmpty() && !correo.isEmpty() && !carnet.isEmpty() && !fecha.isEmpty() && !horaInicio.isEmpty() && !horaFin.isEmpty()){
+                Request<?> request = getRequest(new SolicitudSala(nombre, correo, horaInicio, horaFin, fecha, sala, carnet));
+                AppController.getInstance().addToRequestQueue(request);
+                Toast.makeText(getActivity().getApplicationContext(), "Enviando... Solicitud", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getActivity().getApplicationContext(), "Por favor llene todos los campos", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "No tiene Conección", Toast.LENGTH_SHORT).show();
         }
 
     }

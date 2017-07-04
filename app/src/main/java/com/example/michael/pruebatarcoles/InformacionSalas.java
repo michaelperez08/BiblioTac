@@ -88,11 +88,17 @@ public class InformacionSalas extends Fragment implements View.OnClickListener {
             case R.id.bt_anterior:
                 if(posicion>0){
                     sp_infoSalas.setSelection(posicion-1);
+                } else {
+                    posicion = 5;
+                    sp_infoSalas.setSelection(posicion);
                 }
                 break;
             case R.id.bt_siguiente:
                 if(posicion<5){
                     sp_infoSalas.setSelection(posicion+1);
+                } else {
+                    posicion = 0;
+                    sp_infoSalas.setSelection(posicion);
                 }
                 break;
         }
@@ -116,12 +122,12 @@ public class InformacionSalas extends Fragment implements View.OnClickListener {
 
     public void cargarSalas(){
         listaSalas = new ArrayList<>();
-        listaSalas.add(new Sala(R.drawable.salaa,"Sala A","Hucacion: por ahi\nCapacidad n personas"));
-        listaSalas.add(new Sala(R.drawable.salab,"Sala B","Hucacion: por ahi\nCapacidad n personas"));
-        listaSalas.add(new Sala(R.drawable.audiovisual,"Sala de Proyecciones","Hucacion: por ahi\nCapacidad n personas"));
-        listaSalas.add(new Sala(R.drawable.auditorio,"Auditorio","Hucacion: por ahi\nCapacidad n personas"));
-        listaSalas.add(new Sala(R.drawable.investigacion,"Sala de Investigacion","Hucacion: por ahi\nCapacidad n personas"));
-        listaSalas.add(new Sala(R.drawable.idiomas,"Laboratorio de Idiomas","Hucacion: por ahi\nCapacidad n personas"));
+        listaSalas.add(new Sala(R.drawable.salaa,"Sala A","Ubicación: Área administrativa, contiguo a la Biblioteca.\nCapacidad: 40 personas."));
+        listaSalas.add(new Sala(R.drawable.salab,"Sala B","Ubicación: Contiguo al laboratorio de Biología.\nCapacidad: 40 personas"));
+        listaSalas.add(new Sala(R.drawable.audiovisual,"Sala de Proyecciones","Ubicación: A un costado del comedor estudiantil.\nCapacidad: 33 personas"));
+        listaSalas.add(new Sala(R.drawable.auditorio,"Auditorio","Ubicación: Área administrativa contiguo a la dirección.\nCapacidad: 88 personas"));
+        listaSalas.add(new Sala(R.drawable.investigacion,"Sala de Investigacion","Ubicación: Dentro del area de la Biblioteca\nCapacidad: 14 personas"));
+        listaSalas.add(new Sala(R.drawable.idiomas,"Laboratorio de Idiomas","Ubicación: ??\nCapacidad ?? personas"));
     }
 
 

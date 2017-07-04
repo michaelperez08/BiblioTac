@@ -64,21 +64,21 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
+        //GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+          //      .requestEmail()
+            //    .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        System.out.println("");
-                    }
-                } /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+       // mGoogleApiClient = new GoogleApiClient.Builder(this)
+        //        .enableAutoManage(this /* FragmentActivity */, new GoogleApiClient.OnConnectionFailedListener() {
+            //        @Override
+          //          public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+          //              System.out.println("");
+            //        }
+              //  } /* OnConnectionFailedListener */)
+               // .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                //.build();
 
-        signIn();
+       // signIn();
 
     }
 
@@ -130,12 +130,15 @@ public class MainActivity extends AppCompatActivity
             fragment = new InformacionBiblioteca();
         } else if (id == R.id.consulta) {
             fragment = new ConsultaGeneral();
-        } else if (id == R.id.mensajes) {
-
-        } else if(id == R.id.info_salas){
+        }  else if(id == R.id.info_salas){
             fragment = new InformacionSalas();
+        } else if(id == R.id.reservar_libro){
+            fragment = new ReservaLibros();
+        } else if(id == R.id.busqueda_libro){
+            fragment = new BusquedaLibro();
+        }  else if(id == R.id.principal) {
+            fragment = new principal();
         }
-
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
@@ -148,50 +151,50 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void signIn() {
+    /*private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
+    }*/
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+   public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+        /*if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-        }
+        }*/
     }
 
-    private void handleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
+   // private void handleSignInResult(GoogleSignInResult result) {
+     //   Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+      //  if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            loadInfo(acct);
+       //     GoogleSignInAccount acct = result.getSignInAccount();
+        //    loadInfo(acct);
             /*mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);*/
-        } else {
-            signIn();
-        }
-    }
+       // } else {
+         //   signIn();
+       // }
+    //}
 
-    private void loadInfo(GoogleSignInAccount acct) {
-        Toast.makeText(getApplicationContext(), "Hola " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
-        TextView tvnombre = (TextView) findViewById(R.id.tv_nombreUsuario);
-        TextView tvcorreo = (TextView) findViewById(R.id.tv_correoUsuario);
-        ImageView ivfoto = (ImageView) findViewById(R.id.iv_imgUsuario);
-        tvnombre.setText(acct.getDisplayName());
-        tvcorreo.setText(acct.getEmail());
-        ivfoto.setLayoutParams(new LinearLayout.LayoutParams(150, 150));
+   // private void loadInfo(GoogleSignInAccount acct) {
+    //    Toast.makeText(getApplicationContext(), "Hola " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
+    //    TextView tvnombre = (TextView) findViewById(R.id.tv_nombreUsuario);
+    //    TextView tvcorreo = (TextView) findViewById(R.id.tv_correoUsuario);
+    //    ImageView ivfoto = (ImageView) findViewById(R.id.iv_imgUsuario);
+     //   tvnombre.setText(acct.getDisplayName());
+     //   tvcorreo.setText(acct.getEmail());
+      //  ivfoto.setLayoutParams(new LinearLayout.LayoutParams(150, 150));
         //ivfoto.setImageResource(R.mipmap.coco2);
 
 
-    }
+    //}
 
     public void logout(MenuItem menuItem) {
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+        //Auth.GoogleSignInApi.signOut(mGoogleApiClient);
         finish();
     }
 
